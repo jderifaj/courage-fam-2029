@@ -1,5 +1,6 @@
 ---
 import { render } from 'astro:content';
+import { resolvePhoto } from '../lib/photo.js';
 
 const { family } = Astro.props;
 const { Content } = await render(family);
@@ -7,7 +8,7 @@ const { familyName, playerName, jerseyNumber, parents, siblings, photo, photoAlt
 ---
 
 <article class="card family-card" id={family.id}>
-  <img class="photo" src={photo} alt={photoAlt ?? familyName} loading="lazy" />
+  <img class="photo" src={resolvePhoto(photo)} alt={photoAlt ?? familyName} loading="lazy" />
   <div class="content">
     <span class="player-tag">Player: {playerName}{jerseyNumber ? ` · #${jerseyNumber}` : ''}</span>
     <h2>{familyName}</h2>

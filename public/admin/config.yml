@@ -26,7 +26,7 @@ collections:
       - { label: "Jersey Number", name: "jerseyNumber", widget: "number", required: false, value_type: "int" }
       - { label: "Parents", name: "parents", widget: "string", required: false, hint: "e.g. Jane Smith & John Smith" }
       - { label: "Siblings", name: "siblings", widget: "string", required: false, hint: "e.g. big brother Max (14), baby sister Rae (2)" }
-      - { label: "Family Photo", name: "photo", widget: "image", required: false }
+      - { label: "Family Photo", name: "photo", widget: "image", required: false, accept: "image/jpeg, image/png, image/gif, image/webp, image/heic, image/heif, .heic, .heif", hint: "JPEG, PNG, GIF, WEBP, or HEIC (iPhone photos) — HEIC is automatically converted for you." }
       - { label: "Photo Description", name: "photoAlt", widget: "string", required: false, hint: "Short description of the photo, for accessibility" }
       - label: "About Your Family"
         name: "body"
@@ -44,7 +44,7 @@ collections:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Role", name: "role", widget: "string", default: "Coach" }
       - { label: "Email", name: "email", widget: "string", required: false }
-      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Photo", name: "photo", widget: "image", required: false, accept: "image/jpeg, image/png, image/gif, image/webp, image/heic, image/heif, .heic, .heif" }
       - { label: "Photo Description", name: "photoAlt", widget: "string", required: false }
       - label: "Message to Families"
         name: "body"

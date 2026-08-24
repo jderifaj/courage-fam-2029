@@ -7,12 +7,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/convert-heic.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.2.6"
+    "astro": "^7.2.6",
+    "heic-convert": "^2.1.0",
+    "sharp": "^0.35.3"
   },
   "allowScripts": {
     "esbuild": true
