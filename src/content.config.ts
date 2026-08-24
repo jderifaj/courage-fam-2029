@@ -6,6 +6,7 @@ const families = defineCollection({
   schema: () => z.object({
     familyName: z.string(),
     playerName: z.string(),
+    jerseyNumber: z.number().optional(),
     photo: z.string(),
     photoAlt: z.string().optional(),
     order: z.number().default(0),
@@ -17,6 +18,7 @@ const coaches = defineCollection({
   schema: () => z.object({
     name: z.string(),
     role: z.string().default('Coach'),
+    email: z.string().email().optional(),
     photo: z.string(),
     photoAlt: z.string().optional(),
   }),

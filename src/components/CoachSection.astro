@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 
 const { coach } = Astro.props;
 const { Content } = await render(coach);
-const { name, role, photo, photoAlt } = coach.data;
+const { name, role, email, photo, photoAlt } = coach.data;
 ---
 
 <div class="card coach-card">
@@ -11,6 +11,7 @@ const { name, role, photo, photoAlt } = coach.data;
   <div>
     <p class="role">{role}</p>
     <h2>{name}</h2>
+    {email && <p><a href={`mailto:${email}`}>{email}</a></p>}
     <div class="prose">
       <Content />
     </div>
