@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import FamilyProfile from '../components/FamilyProfile.astro';
+import CoachSection from '../components/CoachSection.astro';
+
+const families = (await getCollection('families')).sort((a, b) => a.data.order - b.data.order);
+const coaches = await getCollection('coaches');
+---
+
+<Layout title="2029 NC Courage Academy Families">
+  <header class="site-header">
+    <img class="logo" src="/images/logo-placeholder.svg" alt="2029 NC Courage Academy" />
+    <p class="eyebrow">2029 NC Courage Academy</p>
+    <h1>Meet the Families</h1>
+    <p>
+      A place for our players, parents, and coaches to get to know one another
+      on and off the field &mdash; hobbies, pets, and everything in between.
+    </p>
+  </header>
+
+  <main class="wrapper">
+    <section id="families">
+      <div class="section-title">
+        <h2>Family Profiles</h2>
+        <p>Every family on the team gets a spot here. Check back as more families join throughout the season!</p>
+      </div>
+      {families.map((family) => <FamilyProfile family={family} />)}
+    </section>
+
+    <section id="coach">
+      <div class="section-title">
+        <h2>From the Coach</h2>
+      </div>
+      {coaches.map((coach) => <CoachSection coach={coach} />)}
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>2029 NC Courage Academy &middot; Built with Astro</p>
+  </footer>
+</Layout>

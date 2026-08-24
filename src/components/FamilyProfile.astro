@@ -1,0 +1,18 @@
+---
+import { render } from 'astro:content';
+
+const { family } = Astro.props;
+const { Content } = await render(family);
+const { familyName, playerName, photo, photoAlt } = family.data;
+---
+
+<article class="card family-card" id={family.id}>
+  <img class="photo" src={photo} alt={photoAlt ?? familyName} loading="lazy" />
+  <div class="content">
+    <span class="player-tag">Player: {playerName}</span>
+    <h2>{familyName}</h2>
+    <div class="prose">
+      <Content />
+    </div>
+  </div>
+</article>

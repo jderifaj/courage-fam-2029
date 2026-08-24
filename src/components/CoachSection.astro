@@ -1,0 +1,18 @@
+---
+import { render } from 'astro:content';
+
+const { coach } = Astro.props;
+const { Content } = await render(coach);
+const { name, role, photo, photoAlt } = coach.data;
+---
+
+<div class="card coach-card">
+  <img src={photo} alt={photoAlt ?? name} loading="lazy" />
+  <div>
+    <p class="role">{role}</p>
+    <h2>{name}</h2>
+    <div class="prose">
+      <Content />
+    </div>
+  </div>
+</div>
