@@ -4,11 +4,8 @@ playerName: "Zoe Agro"
 jerseyNumber: 62
 photo: "/images/family-placeholder.svg"
 photoAlt: "The Agro family"
-order: 62
+parents: "Liz Agro & James Agro"
+siblings: ""
 ---
-
-**Parents:** Liz Agro & James Agro
-
-**Siblings:** _add here_
 
 The Agro family hasn't shared their story yet! Parents, log in and add a few photos plus a note about your family — hobbies, pets, what you like to do together, what you two do for work — so the rest of the team can get to know you.

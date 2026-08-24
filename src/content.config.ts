@@ -7,9 +7,10 @@ const families = defineCollection({
     familyName: z.string(),
     playerName: z.string(),
     jerseyNumber: z.number().optional(),
+    parents: z.string().optional(),
+    siblings: z.string().optional(),
     photo: z.string(),
     photoAlt: z.string().optional(),
-    order: z.number().default(0),
   }),
 });
 

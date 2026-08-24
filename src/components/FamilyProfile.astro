@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 
 const { family } = Astro.props;
 const { Content } = await render(family);
-const { familyName, playerName, jerseyNumber, photo, photoAlt } = family.data;
+const { familyName, playerName, jerseyNumber, parents, siblings, photo, photoAlt } = family.data;
 ---
 
 <article class="card family-card" id={family.id}>
@@ -11,6 +11,8 @@ const { familyName, playerName, jerseyNumber, photo, photoAlt } = family.data;
   <div class="content">
     <span class="player-tag">Player: {playerName}{jerseyNumber ? ` · #${jerseyNumber}` : ''}</span>
     <h2>{familyName}</h2>
+    {parents && <p class="meta-line"><strong>Parents:</strong> {parents}</p>}
+    {siblings && <p class="meta-line"><strong>Siblings:</strong> {siblings}</p>}
     <div class="prose">
       <Content />
     </div>

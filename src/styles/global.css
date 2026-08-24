@@ -142,6 +142,15 @@ section {
   margin-top: 1.5rem;
 }
 
+.family-card .meta-line {
+  margin: 0 0 0.5rem;
+  color: var(--color-text);
+}
+
+.family-card .meta-line + .prose {
+  margin-top: 1rem;
+}
+
 .family-card .prose {
   color: var(--color-text);
 }

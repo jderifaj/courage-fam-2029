@@ -1,0 +1,53 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Once the site is live on Netlify, uncomment and fill in your actual site URL
+# (from your Netlify dashboard) so the CMS's "View Site" link works:
+# site_url: https://your-site-name.netlify.app
+# display_url: https://your-site-name.netlify.app
+logo_url: /images/courage.png
+
+collections:
+  - name: "families"
+    label: "Families"
+    label_singular: "Family"
+    folder: "src/content/families"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: playerName
+    summary: "{{playerName}} — {{familyName}}"
+    fields:
+      - { label: "Family Name", name: "familyName", widget: "string", hint: "e.g. The Smith Family" }
+      - { label: "Player Name", name: "playerName", widget: "string" }
+      - { label: "Jersey Number", name: "jerseyNumber", widget: "number", required: false, value_type: "int" }
+      - { label: "Parents", name: "parents", widget: "string", required: false, hint: "e.g. Jane Smith & John Smith" }
+      - { label: "Siblings", name: "siblings", widget: "string", required: false, hint: "e.g. big brother Max (14), baby sister Rae (2)" }
+      - { label: "Family Photo", name: "photo", widget: "image", required: false }
+      - { label: "Photo Description", name: "photoAlt", widget: "string", required: false, hint: "Short description of the photo, for accessibility" }
+      - label: "About Your Family"
+        name: "body"
+        widget: "markdown"
+        hint: "Tell the team about your family — hobbies, pets, what you like to do together, what the parents do for work, anything you want to share!"
+
+  - name: "coaches"
+    label: "Coaches"
+    label_singular: "Coach"
+    folder: "src/content/coach"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: name
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role", name: "role", widget: "string", default: "Coach" }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Photo Description", name: "photoAlt", widget: "string", required: false }
+      - label: "Message to Families"
+        name: "body"
+        widget: "markdown"
