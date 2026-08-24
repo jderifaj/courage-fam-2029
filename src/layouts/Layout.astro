@@ -17,8 +17,73 @@ const { title, description = 'Meet the families of the 2029 NC Courage Academy t
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        try {
+          var raw = localStorage.getItem('cf2029-auth');
+          if (raw) {
+            var data = JSON.parse(raw);
+            var oneYear = 365 * 24 * 60 * 60 * 1000;
+            if (data && data.ts && Date.now() - data.ts < oneYear) {
+              document.documentElement.classList.add('authed');
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
-    <slot />
+    <div class="auth-gate" id="auth-gate">
+      <div class="auth-gate__panel">
+        <div class="auth-gate__brand">
+          <img src="/images/courage.png" alt="2029 NC Courage Academy" />
+        </div>
+        <div class="auth-gate__form-wrap">
+          <p class="auth-gate__eyebrow">2029 NC Courage Academy</p>
+          <h1>Family Login</h1>
+          <p class="auth-gate__hint">Enter the team password to see family profiles.</p>
+          <form id="auth-form" autocomplete="on">
+            <label>
+              Username
+              <input type="text" name="username" autocomplete="username" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" autocomplete="current-password" required />
+            </label>
+            <p class="auth-gate__error" id="auth-error" hidden>That username or password isn't right. Try again.</p>
+            <button type="submit">Enter</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-content">
+      <slot />
+    </div>
+
+    <script is:inline>
+      (function () {
+        var USERNAME = 'courageFamily';
+        var PASSWORD = 'noOneYouKnowYet@2029';
+        var form = document.getElementById('auth-form');
+        var error = document.getElementById('auth-error');
+        if (!form) return;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var u = form.username.value.trim();
+          var p = form.password.value;
+          if (u === USERNAME && p === PASSWORD) {
+            try {
+              localStorage.setItem('cf2029-auth', JSON.stringify({ ts: Date.now() }));
+            } catch (e) {}
+            document.documentElement.classList.add('authed');
+            if (error) error.hidden = true;
+          } else if (error) {
+            error.hidden = false;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

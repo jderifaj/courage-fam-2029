@@ -202,3 +202,127 @@ section {
   color: var(--color-muted);
   font-size: 0.85rem;
 }
+
+/* Auth gate */
+html:not(.authed) .site-content {
+  display: none;
+}
+
+html.authed .auth-gate {
+  display: none;
+}
+
+.auth-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-gate__panel {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 680px;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .auth-gate__panel {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+.auth-gate__brand {
+  background: var(--color-navy-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-gate__brand img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+}
+
+.auth-gate__form-wrap {
+  padding: 2.25rem;
+}
+
+.auth-gate__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--color-green-dark);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.auth-gate__form-wrap h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-gate__hint {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+#auth-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-navy);
+  margin-bottom: 1rem;
+}
+
+#auth-form input {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #d5dde6;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+#auth-form input:focus {
+  outline: 2px solid var(--color-green);
+  outline-offset: 1px;
+  border-color: var(--color-green);
+}
+
+.auth-gate__error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin: -0.5rem 0 1rem;
+}
+
+#auth-form button {
+  width: 100%;
+  background: var(--color-green);
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#auth-form button:hover {
+  background: var(--color-green-dark);
+}
