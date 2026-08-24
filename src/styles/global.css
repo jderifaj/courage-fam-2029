@@ -48,9 +48,8 @@ img {
 }
 
 .wrapper {
-  max-width: 960px;
+  width: 96%;
   margin: 0 auto;
-  padding: 0 1.5rem;
 }
 
 .site-header {
@@ -88,7 +87,7 @@ img {
 }
 
 section {
-  padding: 3rem 0;
+  padding-bottom: 30px;
 }
 
 .card {
@@ -96,6 +95,7 @@ section {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .family-card {

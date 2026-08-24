@@ -4,7 +4,10 @@ import Layout from '../layouts/Layout.astro';
 import FamilyProfile from '../components/FamilyProfile.astro';
 import CoachSection from '../components/CoachSection.astro';
 
-const families = (await getCollection('families')).sort((a, b) => a.data.order - b.data.order);
+const lastName = (familyName) => familyName.replace(/^The /, '').replace(/ Family$/, '');
+const families = (await getCollection('families')).sort((a, b) =>
+  lastName(a.data.familyName).localeCompare(lastName(b.data.familyName))
+);
 const coaches = await getCollection('coaches');
 ---
 
@@ -37,6 +40,6 @@ const coaches = await getCollection('coaches');
   </main>
 
   <footer class="site-footer">
-    <p>2029 NC Courage Academy &middot; Built with Astro</p>
+    <p>2029 NC Courage Academy</p>
   </footer>
 </Layout>
