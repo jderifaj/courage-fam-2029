@@ -7,10 +7,8 @@ local_backend: true
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
-# Once the site is live on Netlify, uncomment and fill in your actual site URL
-# (from your Netlify dashboard) so the CMS's "View Site" link works:
-# site_url: https://your-site-name.netlify.app
-# display_url: https://your-site-name.netlify.app
+site_url: https://courage-fam-2029.netlify.app
+display_url: https://courage-fam-2029.netlify.app
 logo_url: /images/courage.png
 
 collections:
