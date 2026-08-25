@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&display=swap');
 
 :root {
   --color-navy: #0b2545;
@@ -66,6 +66,26 @@ img {
   color: var(--color-gold);
   font-weight: 600;
   margin-bottom: 0.5rem;
+}
+
+.eyebrow-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.unofficial-badge {
+  position: absolute;
+  top: -0.9rem;
+  right: -0.6rem;
+  transform: rotate(-10deg);
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-gold);
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .site-header h1 {
