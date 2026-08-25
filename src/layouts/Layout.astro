@@ -57,6 +57,11 @@ const { title, description = 'Meet the families of the 2029 NC Courage Academy t
             <p class="auth-gate__error" id="auth-error" hidden>That username or password isn't right. Try again.</p>
             <button type="submit">Enter</button>
           </form>
+          <button type="button" class="auth-gate__forgot" id="auth-forgot">Forgot the password?</button>
+          <p class="auth-gate__forgot-hint" id="auth-forgot-hint" hidden>
+            This is one password shared by the whole team, so there's no automatic reset — just ask Coach Paul Forster
+            (<a href="mailto:paul.forster@ncfcyouth.com">paul.forster@ncfcyouth.com</a>) or another team parent for a reminder.
+          </p>
         </div>
       </div>
     </div>
@@ -86,6 +91,14 @@ const { title, description = 'Meet the families of the 2029 NC Courage Academy t
             error.hidden = false;
           }
         });
+
+        var forgotButton = document.getElementById('auth-forgot');
+        var forgotHint = document.getElementById('auth-forgot-hint');
+        if (forgotButton && forgotHint) {
+          forgotButton.addEventListener('click', function () {
+            forgotHint.hidden = !forgotHint.hidden;
+          });
+        }
       })();
     </script>
 

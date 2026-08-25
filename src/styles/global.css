@@ -74,18 +74,23 @@ img {
 }
 
 .unofficial-badge {
-  position: absolute;
-  top: -0.9rem;
-  right: -0.6rem;
-  transform: rotate(-10deg);
-  font-family: 'Caveat', cursive;
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--color-gold);
+  color: white;
   text-transform: none;
   letter-spacing: normal;
   white-space: nowrap;
   pointer-events: none;
+  font-family: Caveat, cursive;
+  font-size: 1.15rem;
+  font-weight: 700;
+  position: absolute;
+  top: -1.9rem;
+  right: -0.6rem;
+  transform: rotate(-10deg);
+}
+
+/* On the login card the badge sits on white, not navy — keep it readable there */
+.auth-gate__eyebrow .unofficial-badge {
+  color: var(--color-green-dark);
 }
 
 .site-header h1 {
@@ -374,4 +379,25 @@ html.authed .auth-gate {
 
 #auth-form button:hover {
   background: var(--color-green-dark);
+}
+
+.auth-gate__forgot {
+  display: block;
+  margin: 0.85rem auto 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-green-dark);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.auth-gate__forgot-hint {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f2f6f4;
+  border-radius: 8px;
+  color: var(--color-muted);
+  font-size: 0.85rem;
 }
