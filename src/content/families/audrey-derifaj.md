@@ -1,11 +1,11 @@
 ---
-familyName: "The Derifaj Family"
-playerName: "Audrey Derifaj"
+familyName: The Derifaj Family
+playerName: Audrey Derifaj
 jerseyNumber: 60
-photo: "/images/family-placeholder.svg"
-photoAlt: "The Derifaj family"
-parents: "Caroline Derifaj & Jason Derifaj"
-siblings: ""
+parents: Caroline Derifaj & Jason Derifaj
+siblings: Sarah(19) Sophomore at UNCG
+photo: /images/uploads/img_8824.jpeg
+photoAlt: The Derifaj family in Amsterdam - 2026
 ---
-
-The Derifaj family hasn't shared their story yet! Parents, log in and add a few photos plus a note about your family — hobbies, pets, what you like to do together, what you two do for work — so the rest of the team can get to know you.
+We have  1 cat- Lew and 1 guinea pig- Ruby\
+Favorite thing to do as a family- travel
