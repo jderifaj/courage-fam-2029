@@ -14,6 +14,12 @@ const { title, description = 'Meet the families of the 2029 NC Courage Academy t
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/images/courage.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&display=swap"
+    />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -102,18 +108,20 @@ const { title, description = 'Meet the families of the 2029 NC Courage Academy t
       })();
     </script>
 
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" is:inline></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer is:inline></script>
     <script is:inline>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', function (user) {
-          if (!user) {
-            window.netlifyIdentity.on('login', function () {
-              window.netlifyIdentity.close();
-              document.location.href = '/admin/';
-            });
-          }
-        });
-      }
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on('init', function (user) {
+            if (!user) {
+              window.netlifyIdentity.on('login', function () {
+                window.netlifyIdentity.close();
+                document.location.href = '/admin/';
+              });
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>

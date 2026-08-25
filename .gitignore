@@ -1,5 +1,8 @@
 # build output
 dist/
+# generated at build time by scripts/optimize-images.mjs — not committed,
+# regenerated fresh on every Netlify build
+public/images/uploads/*.opt.webp
 # generated types
 .astro/
 

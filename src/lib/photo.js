@@ -1,6 +1,9 @@
-// HEIC/HEIF uploads are converted to a same-named .webp file at build time
-// by scripts/convert-heic.mjs. Browsers can't render HEIC directly, so any
-// photo path ending in .heic/.heif should point at its .webp sibling instead.
+// Every upload under /images/uploads/ gets a resized, compressed .opt.webp
+// derivative at build time (scripts/optimize-images.mjs) — full-resolution
+// phone photos are multiple megabytes and would make the page painfully
+// slow otherwise. Static assets outside that folder (placeholders, the
+// team logo) are already reasonably sized and are left alone.
 export function resolvePhoto(photo) {
-  return photo.replace(/\.(heic|heif)$/i, '.webp');
+  if (!photo.startsWith('/images/uploads/')) return photo;
+  return photo.replace(/\.[^./]+$/, '.opt.webp');
 }
