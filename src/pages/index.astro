@@ -33,10 +33,6 @@ const coaches = await getCollection('coaches');
 
   <main class="wrapper">
     <section id="families">
-      <div class="section-title">
-        <h2>Family Profiles</h2>
-        <p>Every family on the team gets a spot here. Check back as more families join throughout the season!</p>
-      </div>
       {families.map((family) => <FamilyProfile family={family} />)}
     </section>
 
