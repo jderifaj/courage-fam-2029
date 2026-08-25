@@ -4,6 +4,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Content Manager · 2029 NC Courage Academy</title>
+    <style>
+      /* Decap's internal component class names have a build-hash prefix that
+         changes between versions, plus a semantic suffix that's far more
+         stable — we target only that semantic part, and only real HTML
+         elements (nav) where possible, to keep this from breaking silently
+         on a Decap update. Worst case if it ever does: these small touches
+         just stop appearing, nothing else is affected. */
+      nav {
+        display: flex;
+        align-items: center;
+      }
+
+      nav::after {
+        content: 'Admin Section';
+        margin-left: 1rem;
+        font-family: Georgia, serif;
+        font-weight: 700;
+        color: #0b2545;
+        font-size: 0.95rem;
+      }
+
+      li[class*='ListCard-card-card'] {
+        position: relative;
+      }
+
+      a[class*='ListCardLink']::after {
+        content: '\270F\FE0F';
+        position: absolute;
+        top: 50%;
+        right: 1.25rem;
+        transform: translateY(-50%);
+        font-size: 1.1rem;
+      }
+    </style>
   </head>
   <body>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -45,7 +79,7 @@
                     {
                       style: {
                         position: 'absolute',
-                        top: 0,
+                        bottom: 0,
                         left: 0,
                         right: 0,
                         margin: 0,

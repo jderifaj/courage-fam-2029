@@ -15,6 +15,7 @@ collections:
   - name: "families"
     label: "Families"
     label_singular: "Family"
+    description: "Please select your family to edit"
     folder: "src/content/families"
     create: true
     slug: "{{slug}}"
