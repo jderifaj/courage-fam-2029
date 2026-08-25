@@ -8,5 +8,115 @@
   <body>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      var NAVY = '#0b2545';
+      var GREEN = '#3f9a6e';
+      var GREEN_DARK = '#2f7854';
+      var MUTED = '#5b6b7c';
+
+      function resolveAssetUrl(getAsset, path) {
+        if (!path) return null;
+        var asset = getAsset(path);
+        return asset ? asset.toString() : null;
+      }
+
+      var FamilyPreview = createClass({
+        render: function () {
+          var data = this.props.entry.get('data');
+          var photoUrl = resolveAssetUrl(this.props.getAsset, data.get('photo'));
+          var photoAlt = data.get('photoAlt');
+          var jerseyNumber = data.get('jerseyNumber');
+
+          return h(
+            'div',
+            { style: { fontFamily: 'Georgia, serif', color: '#1a2634' } },
+            photoUrl &&
+              h(
+                'div',
+                { style: { position: 'relative' } },
+                h('img', {
+                  src: photoUrl,
+                  alt: photoAlt || data.get('familyName'),
+                  style: { width: '100%', maxHeight: '420px', objectFit: 'cover', display: 'block' },
+                }),
+                photoAlt &&
+                  h(
+                    'p',
+                    {
+                      style: {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        margin: 0,
+                        padding: '10px 16px',
+                        background: 'rgba(255,255,255,0.8)',
+                        color: NAVY,
+                        fontWeight: 700,
+                      },
+                    },
+                    photoAlt
+                  )
+              ),
+            h(
+              'div',
+              { style: { padding: '1.25rem' } },
+              h(
+                'span',
+                {
+                  style: {
+                    display: 'inline-block',
+                    background: GREEN,
+                    color: '#fff',
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                    padding: '0.3rem 0.8rem',
+                    borderRadius: '999px',
+                    marginBottom: '0.75rem',
+                  },
+                },
+                'Player: ' + (data.get('playerName') || '') + (jerseyNumber ? ' · #' + jerseyNumber : '')
+              ),
+              h('h2', { style: { color: NAVY, margin: '0 0 0.5rem' } }, data.get('familyName')),
+              data.get('parents') && h('p', { style: { margin: '0 0 0.5rem' } }, h('strong', {}, 'Parents: '), data.get('parents')),
+              data.get('siblings') && h('p', { style: { margin: '0 0 0.5rem' } }, h('strong', {}, 'Siblings: '), data.get('siblings')),
+              h('div', { style: { marginTop: '1rem' } }, this.props.widgetFor('body'))
+            )
+          );
+        },
+      });
+      CMS.registerPreviewTemplate('families', FamilyPreview);
+
+      var CoachPreview = createClass({
+        render: function () {
+          var data = this.props.entry.get('data');
+          var photoUrl = resolveAssetUrl(this.props.getAsset, data.get('photo'));
+
+          return h(
+            'div',
+            { style: { fontFamily: 'Georgia, serif', color: '#1a2634', display: 'flex', gap: '1.5rem', alignItems: 'center', padding: '1.25rem' } },
+            photoUrl &&
+              h('img', {
+                src: photoUrl,
+                alt: data.get('photoAlt') || data.get('name'),
+                style: { width: '96px', height: '96px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0, border: '3px solid ' + GREEN },
+              }),
+            h(
+              'div',
+              {},
+              h(
+                'p',
+                { style: { color: GREEN_DARK, fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', margin: '0 0 0.25rem' } },
+                data.get('role')
+              ),
+              h('h2', { style: { color: NAVY, margin: '0 0 0.25rem' } }, data.get('name')),
+              data.get('email') && h('p', { style: { color: MUTED, margin: '0 0 0.5rem' } }, data.get('email')),
+              h('div', {}, this.props.widgetFor('body'))
+            )
+          );
+        },
+      });
+      CMS.registerPreviewTemplate('coaches', CoachPreview);
+    </script>
   </body>
 </html>
