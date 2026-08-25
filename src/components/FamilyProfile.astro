@@ -13,7 +13,11 @@ const { familyName, playerName, jerseyNumber, parents, siblings, photo, photoAlt
     {photoAlt && <p class="photo-caption">{photoAlt}</p>}
   </div>
   <div class="content">
-    <span class="player-tag">Player: {playerName}{jerseyNumber ? ` · #${jerseyNumber}` : ''}</span>
+    <div class="player-tag">
+      <span class="player-tag__label">Player</span>
+      <span class="player-tag__name">{playerName}</span>
+      {jerseyNumber && <span class="player-tag__number">#{jerseyNumber}</span>}
+    </div>
     <h2>{familyName}</h2>
     {parents && <p class="meta-line"><strong>Parents:</strong> {parents}</p>}
     {siblings && <p class="meta-line"><strong>Siblings:</strong> {siblings}</p>}
