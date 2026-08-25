@@ -8,7 +8,10 @@ const { familyName, playerName, jerseyNumber, parents, siblings, photo, photoAlt
 ---
 
 <article class="card family-card" id={family.id}>
-  <img class="photo" src={resolvePhoto(photo)} alt={photoAlt ?? familyName} loading="lazy" />
+  <div class="photo-wrap">
+    <img class="photo" src={resolvePhoto(photo)} alt={photoAlt ?? familyName} loading="lazy" />
+    {photoAlt && <p class="photo-caption">{photoAlt}</p>}
+  </div>
   <div class="content">
     <span class="player-tag">Player: {playerName}{jerseyNumber ? ` · #${jerseyNumber}` : ''}</span>
     <h2>{familyName}</h2>
