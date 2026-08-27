@@ -1,11 +1,10 @@
 ---
-familyName: "The Bass Family"
-playerName: "Audrey Bass"
+familyName: The Bass Family
+playerName: Audrey Bass
 jerseyNumber: 54
-photo: "/images/family-placeholder.svg"
-photoAlt: "The Bass family"
-parents: "Mikel Bass & Daniel Bass"
-siblings: ""
+parents: Mikel Bass & Daniel Bass
+siblings: Madi, Ashlyn, Audrey, Salem
+photo: /images/uploads/bassfamily.jpeg
+photoAlt: The Bass family
 ---
-
-The Bass family hasn't shared their story yet! Parents, log in and add a few photos plus a note about your family — hobbies, pets, what you like to do together, what you two do for work — so the rest of the team can get to know you.
+Side  hobbies are coaching for Mikel and woodworking for Daniel but our favorite things are cheering on Madi at UNCG and watching our girls play of course!
