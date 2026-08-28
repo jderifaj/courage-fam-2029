@@ -4,11 +4,16 @@ import { resolvePhoto } from '../lib/photo.js';
 
 const { coach } = Astro.props;
 const { Content } = await render(coach);
-const { name, role, email, photo, photoAlt } = coach.data;
+const { name, role, email, photo, photoAlt, photoPosition } = coach.data;
 ---
 
 <div class="card coach-card">
-  <img src={resolvePhoto(photo)} alt={photoAlt ?? name} loading="lazy" />
+  <img
+    src={resolvePhoto(photo)}
+    alt={photoAlt ?? name}
+    loading="lazy"
+    style={`object-position: ${photoPosition ?? '50% 50%'}`}
+  />
   <div>
     <p class="role">{role}</p>
     <h2>{name}</h2>

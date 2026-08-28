@@ -54,12 +54,169 @@
         return asset ? asset.toString() : null;
       }
 
+      // Custom "focalpoint" widget: click or drag on a photo to choose which
+      // part of it stays visible when object-fit: cover crops it on the site.
+      // Value is stored as a plain CSS object-position string, e.g. "30% 50%".
+      function clampPercent(n) {
+        return Math.max(0, Math.min(100, n));
+      }
+
+      function parseFocalPoint(value) {
+        var match = typeof value === 'string' && value.match(/(-?\d+(?:\.\d+)?)%\s+(-?\d+(?:\.\d+)?)%/);
+        if (match) {
+          return { x: clampPercent(parseFloat(match[1])), y: clampPercent(parseFloat(match[2])) };
+        }
+        return { x: 50, y: 50 };
+      }
+
+      function formatFocalPoint(point) {
+        return Math.round(point.x) + '% ' + Math.round(point.y) + '%';
+      }
+
+      var FocalPointControl = createClass({
+        getInitialState: function () {
+          return { dragging: false };
+        },
+
+        setFromEvent: function (e) {
+          var node = this.previewNode;
+          if (!node) return;
+          var rect = node.getBoundingClientRect();
+          var touch = e.touches && e.touches[0];
+          var clientX = touch ? touch.clientX : e.clientX;
+          var clientY = touch ? touch.clientY : e.clientY;
+          var point = {
+            x: clampPercent(((clientX - rect.left) / rect.width) * 100),
+            y: clampPercent(((clientY - rect.top) / rect.height) * 100),
+          };
+          this.props.onChange(formatFocalPoint(point));
+        },
+
+        handleMouseDown: function (e) {
+          e.preventDefault();
+          this.setState({ dragging: true });
+          this.setFromEvent(e);
+          window.addEventListener('mousemove', this.handleMouseMove);
+          window.addEventListener('mouseup', this.handleMouseUp);
+        },
+        handleMouseMove: function (e) {
+          this.setFromEvent(e);
+        },
+        handleMouseUp: function () {
+          this.setState({ dragging: false });
+          window.removeEventListener('mousemove', this.handleMouseMove);
+          window.removeEventListener('mouseup', this.handleMouseUp);
+        },
+        handleTouchStart: function (e) {
+          this.setState({ dragging: true });
+          this.setFromEvent(e);
+        },
+        handleTouchMove: function (e) {
+          e.preventDefault();
+          this.setFromEvent(e);
+        },
+        handleTouchEnd: function () {
+          this.setState({ dragging: false });
+        },
+        handleReset: function (e) {
+          e.preventDefault();
+          this.props.onChange('50% 50%');
+        },
+        componentWillUnmount: function () {
+          window.removeEventListener('mousemove', this.handleMouseMove);
+          window.removeEventListener('mouseup', this.handleMouseUp);
+        },
+
+        render: function () {
+          var props = this.props;
+          var self = this;
+          var imageFieldName = (props.field.get && props.field.get('image_field')) || 'photo';
+          var entryData = props.entry && props.entry.get('data');
+          var photoPath = entryData && entryData.get(imageFieldName);
+          var photoUrl = photoPath ? resolveAssetUrl(props.getAsset, photoPath) : null;
+          var point = parseFocalPoint(props.value);
+
+          if (!photoUrl) {
+            return h(
+              'p',
+              { style: { color: '#5b6b7c', fontStyle: 'italic', margin: 0 } },
+              'Upload a photo above first, then come back here to set the focus point.'
+            );
+          }
+
+          return h(
+            'div',
+            {},
+            h(
+              'div',
+              {
+                ref: function (node) {
+                  self.previewNode = node;
+                },
+                onMouseDown: this.handleMouseDown,
+                onTouchStart: this.handleTouchStart,
+                onTouchMove: this.handleTouchMove,
+                onTouchEnd: this.handleTouchEnd,
+                style: {
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: '360px',
+                  aspectRatio: '4 / 3',
+                  overflow: 'hidden',
+                  borderRadius: '6px',
+                  cursor: this.state.dragging ? 'grabbing' : 'crosshair',
+                  border: '2px solid #d7dee5',
+                  userSelect: 'none',
+                  touchAction: 'none',
+                },
+              },
+              h('img', {
+                src: photoUrl,
+                draggable: false,
+                style: { width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' },
+              }),
+              h('div', {
+                style: {
+                  position: 'absolute',
+                  left: point.x + '%',
+                  top: point.y + '%',
+                  width: '22px',
+                  height: '22px',
+                  marginLeft: '-11px',
+                  marginTop: '-11px',
+                  borderRadius: '50%',
+                  border: '2px solid #fff',
+                  boxShadow: '0 0 0 2px ' + GREEN + ', 0 1px 4px rgba(0,0,0,0.5)',
+                  background: 'rgba(63,154,110,0.35)',
+                  pointerEvents: 'none',
+                },
+              })
+            ),
+            h(
+              'div',
+              { style: { marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' } },
+              h('span', { style: { fontSize: '0.85rem', color: MUTED } }, 'Focus: ' + formatFocalPoint(point)),
+              h('button', { type: 'button', onClick: this.handleReset, style: { fontSize: '0.85rem' } }, 'Reset to center')
+            )
+          );
+        },
+      });
+
+      var FocalPointPreview = createClass({
+        render: function () {
+          return h('span', {}, this.props.value || '50% 50%');
+        },
+      });
+
+      CMS.registerWidget('focalpoint', FocalPointControl, FocalPointPreview);
+
       var FamilyPreview = createClass({
         render: function () {
           var data = this.props.entry.get('data');
           var photoUrl = resolveAssetUrl(this.props.getAsset, data.get('photo'));
           var photoAlt = data.get('photoAlt');
           var jerseyNumber = data.get('jerseyNumber');
+          var photoPosition = data.get('photoPosition') || '50% 50%';
 
           return h(
             'div',
@@ -71,7 +228,7 @@
                 h('img', {
                   src: photoUrl,
                   alt: photoAlt || data.get('familyName'),
-                  style: { width: '100%', maxHeight: '420px', objectFit: 'cover', display: 'block' },
+                  style: { width: '100%', maxHeight: '420px', objectFit: 'cover', objectPosition: photoPosition, display: 'block' },
                 }),
                 photoAlt &&
                   h(
@@ -125,6 +282,7 @@
         render: function () {
           var data = this.props.entry.get('data');
           var photoUrl = resolveAssetUrl(this.props.getAsset, data.get('photo'));
+          var photoPosition = data.get('photoPosition') || '50% 50%';
 
           return h(
             'div',
@@ -133,7 +291,7 @@
               h('img', {
                 src: photoUrl,
                 alt: data.get('photoAlt') || data.get('name'),
-                style: { width: '96px', height: '96px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0, border: '3px solid ' + GREEN },
+                style: { width: '96px', height: '96px', borderRadius: '50%', objectFit: 'cover', objectPosition: photoPosition, flexShrink: 0, border: '3px solid ' + GREEN },
               }),
             h(
               'div',

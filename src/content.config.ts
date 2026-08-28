@@ -10,6 +10,7 @@ const families = defineCollection({
     parents: z.string().optional(),
     siblings: z.string().optional(),
     photo: z.string(),
+    photoPosition: z.string().optional(),
     photoAlt: z.string().optional(),
   }),
 });
@@ -21,6 +22,7 @@ const coaches = defineCollection({
     role: z.string().default('Coach'),
     email: z.string().email().optional(),
     photo: z.string(),
+    photoPosition: z.string().optional(),
     photoAlt: z.string().optional(),
   }),
 });

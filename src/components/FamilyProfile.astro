@@ -4,12 +4,18 @@ import { resolvePhoto } from '../lib/photo.js';
 
 const { family } = Astro.props;
 const { Content } = await render(family);
-const { familyName, playerName, jerseyNumber, parents, siblings, photo, photoAlt } = family.data;
+const { familyName, playerName, jerseyNumber, parents, siblings, photo, photoAlt, photoPosition } = family.data;
 ---
 
 <article class="card family-card" id={family.id}>
   <div class="photo-wrap">
-    <img class="photo" src={resolvePhoto(photo)} alt={photoAlt ?? familyName} loading="lazy" />
+    <img
+      class="photo"
+      src={resolvePhoto(photo)}
+      alt={photoAlt ?? familyName}
+      loading="lazy"
+      style={`object-position: ${photoPosition ?? '50% 50%'}`}
+    />
     {photoAlt && <p class="photo-caption">{photoAlt}</p>}
   </div>
   <div class="content">

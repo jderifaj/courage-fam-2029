@@ -28,6 +28,7 @@ collections:
       - { label: "Parents", name: "parents", widget: "string", required: false, hint: "e.g. Jane Smith & John Smith" }
       - { label: "Siblings", name: "siblings", widget: "string", required: false, hint: "e.g. big brother Max (14), baby sister Rae (2)" }
       - { label: "Family Photo", name: "photo", widget: "image", required: false, accept: "image/jpeg, image/png, image/gif, image/webp, image/heic, image/heif, .heic, .heif", hint: "JPEG, PNG, GIF, WEBP, or HEIC (iPhone photos) — HEIC is automatically converted for you." }
+      - { label: "Photo Focus", name: "photoPosition", widget: "focalpoint", required: false, default: "50% 50%", image_field: "photo", hint: "Click or drag on the photo to choose what stays visible when it's cropped on the site." }
       - { label: "Photo Description", name: "photoAlt", widget: "string", required: false, hint: "Short description of the photo, for accessibility" }
       - label: "About Your Family"
         name: "body"
@@ -46,6 +47,7 @@ collections:
       - { label: "Role", name: "role", widget: "string", default: "Coach" }
       - { label: "Email", name: "email", widget: "string", required: false }
       - { label: "Photo", name: "photo", widget: "image", required: false, accept: "image/jpeg, image/png, image/gif, image/webp, image/heic, image/heif, .heic, .heif" }
+      - { label: "Photo Focus", name: "photoPosition", widget: "focalpoint", required: false, default: "50% 50%", image_field: "photo", hint: "Click or drag on the photo to choose what stays visible when it's cropped on the site." }
       - { label: "Photo Description", name: "photoAlt", widget: "string", required: false }
       - label: "Message to Families"
         name: "body"
