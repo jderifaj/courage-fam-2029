@@ -1,11 +1,10 @@
 ---
-familyName: "The Ferm Family"
-playerName: "Cecilia Ferm"
+familyName: The Ferm Family
+playerName: Cecilia Ferm
 jerseyNumber: 56
-photo: "/images/family-placeholder.svg"
-photoAlt: "The Ferm family"
-parents: "Bo Ferm & Debbi Ferm"
-siblings: ""
+parents: Bo Ferm & Debbi Ferm
+siblings: Emma (2025 App state graduate), Maja ( Junior at UNC- Chapel Hill)
+photo: /images/uploads/20250702_115147.jpg
+photoAlt: The Ferm family
 ---
-
-The Ferm family hasn't shared their story yet! Parents, log in and add a few photos plus a note about your family — hobbies, pets, what you like to do together, what you two do for work — so the rest of the team can get to know you.
+The two older sisters  - members of the family love to hike and force it on the rest of the family. 😂 We are also a dog loving family.
