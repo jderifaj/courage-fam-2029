@@ -77,6 +77,21 @@ img {
   text-align: center;
 }
 
+.player-sheets-link {
+  text-align: center;
+  margin: 1.25rem 0 0;
+}
+
+.player-sheets-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.player-sheets-link__icon {
+  flex-shrink: 0;
+}
+
 @media (min-width: 720px) {
   .site-header__inner {
     flex-direction: row;

@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const families = (await getCollection('families')).sort((a, b) => {
+  const an = a.data.jerseyNumber ?? Infinity;
+  const bn = b.data.jerseyNumber ?? Infinity;
+  return an - bn;
+});
+---
+
+<Layout title="Player Sheets — 2029 NC Courage Academy">
+  <main class="wrapper sheet-page">
+    <div class="sheet-page__actions no-print">
+      <a href="/">&larr; Back to families</a>
+      <button type="button" onclick="window.print()">Print</button>
+    </div>
+
+    <div class="player-sheet-grid">
+      {families.map((family) => (
+        <section class="player-sheet">
+          <p class="player-sheet__number">
+            {family.data.jerseyNumber ?? '—'}
+          </p>
+          <h2 class="player-sheet__name">{family.data.playerName}</h2>
+          {family.data.parents && (
+            <p class="player-sheet__parents">
+              Parents: {family.data.parents.split(/\s*&\s*/).join(', ')}
+            </p>
+          )}
+        </section>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .sheet-page__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+  }
+
+  .sheet-page__actions button {
+    font: inherit;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--color-navy);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .player-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .player-sheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.6rem 0.3rem;
+    border: 1px dashed #bbb;
+    margin: -1px 0 0 -1px;
+  }
+
+  .player-sheet__number {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--color-navy);
+    margin: 0;
+  }
+
+  .player-sheet__name {
+    font-size: 0.95rem;
+    margin: 0.3rem 0 0.15rem;
+  }
+
+  .player-sheet__parents {
+    font-size: 0.65rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  @media print {
+    @page {
+      size: letter portrait;
+      margin: 0.4in;
+    }
+
+    .no-print {
+      display: none;
+    }
+  }
+</style>
